@@ -225,8 +225,9 @@ tagsInput.directive('tagsInput', ["$timeout","$document","tagsInputConfig", func
                 minLength: [Number, 3],
                 maxLength: [Number, MAX_SAFE_INTEGER],
                 addOnEnter: [Boolean, true],
-                addOnSpace: [Boolean, false],
+                addOnSpace: [Boolean, true],
                 addOnComma: [Boolean, true],
+                addOnTab: [Boolean, true],
                 addOnBlur: [Boolean, true],
                 allowedTagsPattern: [RegExp, /.+/],
                 enableEditingLastTag: [Boolean, false],
@@ -269,7 +270,7 @@ tagsInput.directive('tagsInput', ["$timeout","$document","tagsInputConfig", func
             };
         }],
         link: function(scope, element, attrs, ngModelCtrl) {
-            var hotkeys = [KEYS.enter, KEYS.comma, KEYS.space, KEYS.backspace],
+            var hotkeys = [KEYS.enter, KEYS.comma, KEYS.space, KEYS.backspace, KEYS.tab],
                 tagList = scope.tagList,
                 events = scope.events,
                 options = scope.options,
@@ -361,6 +362,7 @@ tagsInput.directive('tagsInput', ["$timeout","$document","tagsInputConfig", func
                     addKeys[KEYS.enter] = options.addOnEnter;
                     addKeys[KEYS.comma] = options.addOnComma;
                     addKeys[KEYS.space] = options.addOnSpace;
+                    addKeys[KEYS.tab] = options.addOnTab;
 
                     shouldAdd = !options.addFromAutocompleteOnly && addKeys[key];
                     shouldRemove = !shouldAdd && key === KEYS.backspace && scope.newTag.text.length === 0;
@@ -515,7 +517,7 @@ tagsInput.directive('autoComplete', ["$document","$timeout","$sce","tagsInputCon
         require: '^tagsInput',
         scope: { source: '&' },
         templateUrl: 'ngTagsInput/auto-complete.html',
-        link: function(scope, element, attrs, tagsInputCtrl) {
+        link: function(scope, element, attrs, tagsInputCtrl, $sanitize) {
             var hotkeys = [KEYS.enter, KEYS.tab, KEYS.escape, KEYS.up, KEYS.down],
                 suggestionList, tagsInput, options, getItem, getDisplayText, shouldLoadSuggestions;
 
