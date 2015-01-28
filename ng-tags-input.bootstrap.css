@@ -22,7 +22,6 @@ tags-input .tags {
 tags-input .tags .tag-item {
   color: white;
   background: #428bca;
-  border: 1px solid #357ebd;
   border-radius: 4px;
 }
 tags-input .tags .tag-item.selected {

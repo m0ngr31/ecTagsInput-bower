@@ -862,8 +862,9 @@ tagsInput.run(["$templateCache", function($templateCache) {
   );
 
   $templateCache.put('ngTagsInput/auto-complete.html',
-    "<div class=\"autocomplete\" ng-show=\"suggestionList.visible\"><ul class=\"suggestion-list\"><li class=\"suggestion-item\" ng-repeat=\"item in suggestionList.items track by track(item)\" ng-class=\"{selected: item == suggestionList.selected}\" ng-click=\"addSuggestionByIndex($index)\" ng-mouseenter=\"suggestionList.select($index)\" ng-bind-html=\"highlight(item)\"></li></ul></div>"
-  );
+    '<div tabindex="-1" class="popover am-popover auto autocomplete" style="margin-top:50px;" ng-show="suggestionList.visible"><div class="arrow"></div><div class="popover-content ng-binding"><div class="popover-inner"><ul class="listing" role="select"><li role="presentation" ng-repeat="item in suggestionList.items track by track(item)" ng-click="addSuggestionByIndex($index)" ng-mouseenter="suggestionList.select($index)" ng-bind-html="highlight(item)"></li></ul></div></div></div>'
+    );
 }]);
 
 }());
+

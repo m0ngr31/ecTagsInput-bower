@@ -24,15 +24,16 @@ tags-input .tags {
   word-wrap: break-word;
   cursor: text;
   background-color: white;
-  border: 1px solid darkgray;
   box-shadow: 1px 1px 1px 0 lightgray inset;
   height: 100%;
+  border:1px solid #dadada !important; padding-left:10px !important;
 }
 tags-input .tags.focused {
   outline: none;
   -webkit-box-shadow: 0 0 3px 1px rgba(5, 139, 242, 0.6);
   -moz-box-shadow: 0 0 3px 1px rgba(5, 139, 242, 0.6);
   box-shadow: 0 0 3px 1px rgba(5, 139, 242, 0.6);
+  border:1px solid #dadada !important; padding-left:10px !important;
 }
 tags-input .tags .tag-list {
   margin: 0;
@@ -47,7 +48,6 @@ tags-input .tags .tag-item {
   font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
   height: 26px;
   line-height: 25px;
-  border: 1px solid #acacac;
   border-radius: 3px;
   background: -webkit-linear-gradient(top, #f0f9ff 0%, #cbebff 47%, #a1dbff 100%);
   background: linear-gradient(to bottom, #f0f9ff 0%, #cbebff 47%, #a1dbff 100%);

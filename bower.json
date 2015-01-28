@@ -1,6 +1,6 @@
 {
   "name": "ec-tags-input",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "location": "https://github.com/m0ngr31/ecTagsInput-bower",
   "main": [
     "ng-tags-input.min.js",
