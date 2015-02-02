@@ -524,7 +524,7 @@ tagsInput.directive('autoComplete', ["$document","$timeout","$sce","tagsInputCon
             tagsInputConfig.load('autoComplete', scope, attrs, {
                 debounceDelay: [Number, 100],
                 minLength: [Number, 3],
-                highlightMatchedText: [Boolean, true],
+                highlightMatchedText: [Boolean, false],
                 maxResultsToShow: [Number, 10],
                 loadOnDownArrow: [Boolean, false],
                 loadOnEmpty: [Boolean, false],
@@ -572,7 +572,7 @@ tagsInput.directive('autoComplete', ["$document","$timeout","$sce","tagsInputCon
 
             scope.highlight = function(item) {
                 var text = getDisplayText(item);
-                text = encodeHTML(text);
+                text = '<a role="menuitem">' + text + '</a>';
                 if (options.highlightMatchedText) {
                     text = replaceAll(text, encodeHTML(suggestionList.query), '<em>$&</em>');
                 }
@@ -853,17 +853,4 @@ tagsInput.provider('tagsInputConfig', function() {
         };
     }];
 });
-
-
-/* HTML templates */
-tagsInput.run(["$templateCache", function($templateCache) {
-    $templateCache.put('ngTagsInput/tags-input.html',
-    "<div class=\"host\" tabindex=\"-1\" ti-transclude-append=\"\"><div class=\"tags\" ng-class=\"{focused: hasFocus}\"><ul class=\"tag-list\"><li class=\"tag-item\" ng-repeat=\"tag in tagList.items track by $index\" ng-class=\"{ selected: tag == tagList.selected }\"><span ng-bind=\"getDisplayText(tag)\"></span> <a class=\"remove-button\" ng-click=\"tagList.remove($index)\" ng-bind=\"options.removeTagSymbol\"></a></li></ul><input class=\"input\" ng-model=\"newTag.text\" ng-change=\"newTagChange()\" ng-trim=\"false\" ng-class=\"{'invalid-tag': newTag.invalid}\" ti-bind-attrs=\"{type: options.type, placeholder: options.placeholder, tabindex: options.tabindex}\" ti-autosize=\"\"></div></div>"
-  );
-
-  $templateCache.put('ngTagsInput/auto-complete.html',
-    '<div tabindex="-1" class="popover am-popover auto autocomplete" style="margin-top:50px;" ng-show="suggestionList.visible"><div class="arrow"></div><div class="popover-content ng-binding"><div class="popover-inner"><ul class="listing" role="select"><li role="presentation" ng-repeat="item in suggestionList.items track by track(item)" ng-click="addSuggestionByIndex($index)" ng-mouseenter="suggestionList.select($index)" ng-bind-html="highlight(item)"></li></ul></div></div></div>'
-    );
-}]);
-
 }());
