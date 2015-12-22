@@ -340,6 +340,13 @@ tagsInput.directive('tagsInput', ["$timeout","$document","tagsInputConfig", func
             scope.$watch('tags.length', function() {
                 setElementValidity();
             });
+            
+            scope.$on('tags-input::clear-text', function() {
+              _.defer(function() {
+                scope.newTag = { text: '', invalid: null };
+                scope.$digest();
+              });
+            });
 
             input
                 .on('keydown', function(e) {
